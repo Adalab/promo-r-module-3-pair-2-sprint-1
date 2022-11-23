@@ -3,10 +3,24 @@ import '../styles/App.scss';
 
 function App() {
   const [numberOfErrors, setNumberOfErrors] = useState (0);
+  const [lastLetter, setLastLetter] = useState ('');
   const handleClick = () =>{
     setNumberOfErrors (numberOfErrors +1);
   }
- 
+
+  const handleInputLetter = (ev) =>{
+   
+  
+    if (/^[a-zA-Z]$/.test(ev.target.value)){
+      setLastLetter(ev.target.value) ;
+
+    }
+    else{
+      setLastLetter('') ;
+     
+    }
+  }
+
 
   return (
     <div className="page">
@@ -49,6 +63,8 @@ function App() {
               type="text"
               name="last-letter"
               id="last-letter"
+              onChange={handleInputLetter}
+              value ={lastLetter}
             />
           </form>
         </section>
