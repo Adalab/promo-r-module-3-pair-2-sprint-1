@@ -4,6 +4,22 @@ import '../styles/App.scss';
 function App() {
   const [numberOfErrors, setNumberOfErrors] = useState (0);
   const [lastLetter, setLastLetter] = useState ('');
+  const [word, setWord] = useState ('pepino');
+  const [userLetters, setUserLetters] = useState ([]);
+// nos quedamos en ejercicio 3 
+  const renderSolutionLetters = ()=>{
+    const wordLetters = word.split(''); // convierte el string 'word'en un array( en los elementos del array)
+    const returnLetter = word.indexOf(userLetters);
+    if (returnLetter === -1){
+
+    }else {
+      return returnLetter
+    }
+    return wordLetters.map ((letter,index)=>{
+      return <li key={index} className="letter">{returnLetter}</li>;
+    })
+  }
+
   const handleClick = () =>{
     setNumberOfErrors (numberOfErrors +1);
   }
@@ -13,6 +29,8 @@ function App() {
   
     if (/^[a-zA-Z]$/.test(ev.target.value)){
       setLastLetter(ev.target.value) ;
+      userLetters.push(ev.target.value);
+      // setUserLetters([...userLetters]);
 
     }
     else{
@@ -32,7 +50,8 @@ function App() {
           <div className="solution">
             <h2 className="title">Solución:</h2>
             <ul className="letters">
-              <li className="letter">k</li>
+              {renderSolutionLetters()}
+              {/* <li className="letter">k</li>
               <li className="letter">a</li>
               <li className="letter"></li>
               <li className="letter">a</li>
@@ -41,7 +60,7 @@ function App() {
               <li className="letter"></li>
               <li className="letter">k</li>
               <li className="letter">e</li>
-              <li className="letter">r</li>
+              <li className="letter">r</li> */}
             </ul>
           </div>
           <div className="error">
