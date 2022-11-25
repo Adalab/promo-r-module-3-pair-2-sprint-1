@@ -9,17 +9,29 @@ function App() {
 // nos quedamos en ejercicio 3 
   const renderSolutionLetters = ()=>{
     const wordLetters = word.split(''); // convierte el string 'word'en un array( en los elementos del array)
-    const returnLetter = word.indexOf(userLetters);
-    if (returnLetter === -1){
-
-    }else {
-      return returnLetter
-    }
     return wordLetters.map ((letter,index)=>{
-      return <li key={index} className="letter">{returnLetter}</li>;
+         if (userLetters.includes(letter)){
+         /*   console.log(returnLetter);
+           console.log('no está en la palabra') */
+           return <li key={index} className="letter">{letter}</li>;
+         }else {
+         
+        /*    console.log('si está en la palabra') */
+        return <li key={index} className="letter"></li>;
+         }
     })
   }
-
+  const renderErrorLetters = () =>{
+    const wordLetters = word.split(''); // convierte el string 'word'en un array( en los elementos del array)
+    return userLetters.filter ((letter)=>{
+         if (!wordLetters.includes(letter)){
+         return letter;
+          
+         }
+    }).map ((letter, index) =>{return <li key={index} className="letter">{letter}</li>;})
+   
+   
+  }
   const handleClick = () =>{
     setNumberOfErrors (numberOfErrors +1);
   }
@@ -30,7 +42,7 @@ function App() {
     if (/^[a-zA-Z]$/.test(ev.target.value)){
       setLastLetter(ev.target.value) ;
       userLetters.push(ev.target.value);
-      // setUserLetters([...userLetters]);
+      setUserLetters([...userLetters]);
 
     }
     else{
@@ -66,11 +78,12 @@ function App() {
           <div className="error">
             <h2 className="title">Letras falladas:</h2>
             <ul className="letters">
-              <li className="letter">f</li>
+            {renderErrorLetters()}
+              {/* <li className="letter">f</li>
               <li className="letter">q</li>
               <li className="letter">h</li>
               <li className="letter">p</li>
-              <li className="letter">x</li>
+              <li className="letter">x</li> */}
             </ul>
           </div>
           <form className="form">
